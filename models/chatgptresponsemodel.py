@@ -7,7 +7,7 @@ class ChatGptResponseModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     response = db.Column(db.String(50000), unique=True, nullable=False)
     
-    answer_id = db.Column(
-        db.Integer, db.ForeignKey("answers.id"), unique=False, nullable=False
+    request_id = db.Column(
+        db.Integer, db.ForeignKey("requests.id"), unique=False, nullable=False
     )
-    answer = db.relationship("ChatGptAnswerModel", back_populates="responses")
+    request = db.relationship("ChatGptRequestModel", back_populates="responses")

@@ -1,2 +1,2 @@
 from models.chatgptresponsemodel import ChatGptResponseModel
-from models.chatgptanswermodel import ChatGptAnswerModel
+from models.chatgptrequestmodel import ChatGptRequestModel
