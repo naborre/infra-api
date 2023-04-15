@@ -14,3 +14,8 @@ class ChatGptResponseSchema(PlainChatGptResponseSchema):
 
 class ChatGptResponseUpdateSchema(Schema):
     response = fields.Str()
+
+class UserSchema(Schema):
+    id = fields.Int()
+    username = fields.Str()
+    password = fields.Str(load_only=True)
