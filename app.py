@@ -5,6 +5,8 @@ import models
 
 from db import db
 
+from resources.chatgptrequest import blp as ChatGptRequestBlueprint
+from resources.chatgptresponse import blp as ChatGptResponseBlueprint
 
 def create_app(db_url=None):
     app = Flask(__name__)
@@ -25,5 +27,8 @@ def create_app(db_url=None):
 
     with app.app_context():
         db.create_all()
+    
+    api.register_blueprint(ChatGptRequestBlueprint)
+    api.register_blueprint(ChatGptResponseBlueprint)
 
     return app
