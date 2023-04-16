@@ -1,5 +1,6 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
+from flask_jwt_extended import jwt_required
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 
 from db import db
@@ -12,11 +13,13 @@ blp = Blueprint("ChatGptRequests", "chatgptrequests", description="Requests to C
 
 @blp.route("/chatgptrequests/<int:request_id>")
 class ChagGptRequest(MethodView):
+    @jwt_required()
     @blp.response(200, ChatGptRequestSchema)
     def get(self, request_id):
         request = ChatGptRequestModel.query.get_or_404(request_id)
         return request
-
+    
+    @jwt_required()
     def delete(self, request_id):
         request = ChatGptRequestModel.query.get_or_404(request_id)
         db.session.delete(request)
@@ -26,10 +29,12 @@ class ChagGptRequest(MethodView):
 
 @blp.route("/chatgptrequests")
 class ChagGptRequestList(MethodView):
+    @jwt_required()
     @blp.response(200, ChatGptRequestSchema(many=True))
     def get(self):
         return ChatGptRequestModel.query.all()
 
+    @jwt_required()
     @blp.arguments(ChatGptRequestSchema)
     @blp.response(201, ChatGptRequestSchema)
     def post(self, request_data):
