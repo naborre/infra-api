@@ -9,7 +9,7 @@ from schemas import ChatGptResponseSchema, ChatGptResponseUpdateSchema
 blp = Blueprint("ChatGptResponses", "chatgptresponses", description="Responses of chatGPT")
 
 
-@blp.route("/chatgptresponses/<string:response_id>")
+@blp.route("/chatgptresponses/<int:response_id>")
 class ChatGptResponse(MethodView):
     @blp.response(200, ChatGptResponseModel)
     def get(self, response_id):
