@@ -5,4 +5,5 @@ marshmallow
 python-dotenv
 flask-jwt-extended
 gunicorn
+psycopg2
 openai
