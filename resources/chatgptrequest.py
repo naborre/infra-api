@@ -6,6 +6,7 @@ from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from db import db
 from models import ChatGptRequestModel, ChatGptResponseModel
 from schemas import ChatGptRequestSchema
+import sys
 
 
 blp = Blueprint("ChatGptRequests", "chatgptrequests", description="Requests to ChatGPT")
@@ -75,8 +76,8 @@ class ChatGptRequest(MethodView):
         try:
             response_text = get_completion(prompt)
             response = ChatGptResponseModel(request_id=request.id, response=response_text)
-        except Exception as e: 
-            print(e)
+        except Exception as e:
+            print(e, file=sys.stderr)
 
         try:
             db.session.add(response)
