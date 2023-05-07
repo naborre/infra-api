@@ -20,13 +20,12 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
     return response.choices[0].message["content"]
 
 
-@blp.route("/chatgptrequests/<int:request_id>")
+@blp.route("/chatgptrequests")
 class ChatGptRequest(MethodView):
     @jwt_required()
-    @blp.response(200, ChatGptRequestSchema)
-    def get(self, request_id):
-        request = ChatGptRequestModel.query.get_or_404(request_id)
-        return request
+    @blp.response(200, ChatGptRequestSchema(many=True))
+    def get(self):
+        return ChatGptRequestModel.query.all()
 
     @jwt_required()
     @blp.arguments(ChatGptRequestSchema)
@@ -37,8 +36,13 @@ class ChatGptRequest(MethodView):
         try:
             db.session.add(request)
             db.session.commit()
+        except IntegrityError:
+            abort(
+                400,
+                message="Request already exists.",
+            )
         except SQLAlchemyError:
-            abort(500, message="An error occurred while inserting the Request.")
+            abort(500, message="An error occurred creating the Request.")
             
         Cob1 = """Daños Materiales Parciales - POL120160325
         cobertura de indemnización por daños materiales directos a un vehículo asegurado en los siguientes casos:  \
