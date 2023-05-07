@@ -4,7 +4,7 @@ from flask_jwt_extended import jwt_required
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 
 from db import db
-from models import ChatGptRequestModel
+from models import ChatGptRequestModel, ChatGptResponseModel
 from schemas import ChatGptRequestSchema
 
 
