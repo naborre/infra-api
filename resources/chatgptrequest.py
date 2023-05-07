@@ -69,7 +69,7 @@ class ChatGptRequest(MethodView):
         """
 
         try:
-            response_text = get_completion(response)
+            response_text = get_completion(prompt)
             response = ChatGptResponseModel(request_id=request.id, response=response_text)
         except:
             abort(500, message="An error occurred while getting Response.")
