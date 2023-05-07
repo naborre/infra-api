@@ -13,9 +13,9 @@ blp = Blueprint("ChatGptResponses", "chatgptresponses", description="Responses o
 @blp.route("/chatgptresponses/<int:response_id>")
 class ChatGptResponse(MethodView):
     @jwt_required()
-    @blp.response(200, ChatGptResponseModel)
+    @blp.response(200, ChatGptResponseSchema)
     def get(self, response_id):
-        response = ChatGptResponseSchema.query.get_or_404(response_id)
+        response = ChatGptResponseModel.query.get_or_404(response_id)
         return response
 
     @jwt_required()
