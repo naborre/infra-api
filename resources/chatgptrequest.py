@@ -68,9 +68,11 @@ class ChatGptRequest(MethodView):
         considera que es posible que se aplique solo 1 cobertura, ambas o ninguna.
         """
 
-
-        response_text = get_completion(response)
-        response = ChatGptResponseModel(request_id=request.id, response=response_text)
+        try:
+            response_text = get_completion(response)
+            response = ChatGptResponseModel(request_id=request.id, response=response_text)
+        except:
+            abort(500, message="An error occurred while getting Response.")
 
         try:
             db.session.add(response)
