@@ -89,29 +89,3 @@ class ChatGptRequest(MethodView):
 
         return request
 
-'''
-@blp.route("/chatgptrequests")
-class ChagGptRequestList(MethodView):
-    @jwt_required()
-    @blp.response(200, ChatGptRequestSchema(many=True))
-    def get(self):
-        return ChatGptRequestModel.query.all()
-
-    @jwt_required()
-    @blp.arguments(ChatGptRequestSchema)
-    @blp.response(201, ChatGptRequestSchema)
-    def post(self, request_data):
-        request = ChatGptRequestModel(**request_data)
-        try:
-            db.session.add(request)
-            db.session.commit()
-        except IntegrityError:
-            abort(
-                400,
-                message="Request already exists.",
-            )
-        except SQLAlchemyError:
-            abort(500, message="An error occurred creating the Request.")
-
-        return 
-'''
