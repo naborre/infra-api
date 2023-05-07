@@ -23,14 +23,14 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
 @blp.route("/chatgptrequests/<int:request_id>")
 class ChatGptRequest(MethodView):
     @jwt_required()
-    @api.response(200, ChatGptRequestSchema)
+    @blp.response(200, ChatGptRequestSchema)
     def get(self, request_id):
         request = ChatGptRequestModel.query.get_or_404(request_id)
         return request
 
     @jwt_required()
-    @api.arguments(ChatGptRequestSchema)
-    @api.response(201, ChatGptRequestSchema)
+    @blp.arguments(ChatGptRequestSchema)
+    @blp.response(201, ChatGptRequestSchema)
     def post(self, request_data):
         request = ChatGptRequestModel(**request_data)
 

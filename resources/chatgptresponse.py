@@ -13,7 +13,7 @@ blp = Blueprint("ChatGptResponses", "chatgptresponses", description="Responses o
 @blp.route("/chatgptresponses/<int:response_id>")
 class ChatGptResponse(MethodView):
     @jwt_required()
-    @api.response(200, ChatGptResponseSchema)
+    @blp.response(200, ChatGptResponseSchema)
     def get(self, response_id):
         response = ChatGptResponseModel.query.get_or_404(response_id)
         return response
@@ -26,8 +26,8 @@ class ChatGptResponse(MethodView):
         return {"message": "Response deleted."}
 
     @jwt_required()
-    @api.arguments(ChatGptResponseUpdateSchema)
-    @api.response(200, ChatGptResponseSchema)
+    @blp.arguments(ChatGptResponseUpdateSchema)
+    @blp.response(200, ChatGptResponseSchema)
     def put(self, response_data, response_id):
         response = ChatGptResponseModel.query.get(response_id)
 
