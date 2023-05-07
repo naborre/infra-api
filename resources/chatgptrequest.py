@@ -83,7 +83,7 @@ class ChatGptRequest(MethodView):
 
         return request
 
-
+'''
 @blp.route("/chatgptrequests")
 class ChagGptRequestList(MethodView):
     @jwt_required()
@@ -108,3 +108,4 @@ class ChagGptRequestList(MethodView):
             abort(500, message="An error occurred creating the Request.")
 
         return 
+'''
