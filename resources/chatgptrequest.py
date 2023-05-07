@@ -7,6 +7,7 @@ from db import db
 from models import ChatGptRequestModel, ChatGptResponseModel
 from schemas import ChatGptRequestSchema
 import sys
+import openai
 
 
 blp = Blueprint("ChatGptRequests", "chatgptrequests", description="Requests to ChatGPT")
