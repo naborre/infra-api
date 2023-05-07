@@ -28,7 +28,7 @@ def create_app(db_url=None):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["PROPAGATE_EXCEPTIONS"] = True
     app.config['OPENAI_API_KEY'] = "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"
-    openai.api_key = app.config['OPENAI_API_KEY'] 
+    #openai.api_key = app.config['OPENAI_API_KEY'] 
     
     db.init_app(app)
 
