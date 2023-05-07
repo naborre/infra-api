@@ -7,7 +7,7 @@ import models
 
 from db import db
 from blocklist import BLOCKLIST
-from openai import openai
+import openai
 
 
 from resources.chatgptrequest import blp as ChatGptRequestBlueprint
