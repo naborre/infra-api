@@ -87,5 +87,5 @@ class ChatGptRequest(MethodView):
             db.session.rollback()
             abort(500, message="An error occurred while inserting the Response.")
 
-        return ChatGptResponseModel.query.get_or_404(response.id)
+        return response.response
 
