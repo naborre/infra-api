@@ -31,7 +31,7 @@ class ChatGptRequest(MethodView):
 
     @jwt_required()
     @blp.arguments(ChatGptRequestSchema)
-    @blp.response(201, ChatGptRequestSchema)
+    #@blp.response(201, ChatGptRequestSchema)
     def post(self, request_data):
         request = ChatGptRequestModel(**request_data)
 
@@ -87,5 +87,5 @@ class ChatGptRequest(MethodView):
             db.session.rollback()
             abort(500, message="An error occurred while inserting the Response.")
 
-        return request
+        return {"response": response_text}, 201
 
